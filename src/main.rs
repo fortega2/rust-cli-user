@@ -23,6 +23,7 @@ fn menu() {
     loop {
         println!("1. Cargar usuario");
         println!("2. Ver usuarios");
+        println!("3. Buscar usuario por ID");
         println!("0. Salir");
         println!("\nElegí una opción:");
 
@@ -39,6 +40,18 @@ fn menu() {
                 println!();
                 for user in &users {
                     println!("ID: {}\n{}", user.0, user.1);
+                }
+                pause();
+                println!();
+            }
+            3 => {
+                println!("\nIngrese el ID que desea buscar:");
+                let mut buffer = String::new();
+                stdin.read_line(&mut buffer).expect("Error en input");
+                let id = buffer.trim().parse::<i8>().unwrap_or(0);
+                match get_user_by_id(id as usize, &users) {
+                    Some(user) => println!("\n{}", user),
+                    None => println!("\nNo se ha encontrado el usuario con ID {id}\n"),
                 }
                 pause();
                 println!();

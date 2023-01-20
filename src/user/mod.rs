@@ -1,4 +1,5 @@
 use std::fmt;
+use std::collections::HashMap;
 
 #[derive(Debug)]
 pub struct User {
@@ -46,4 +47,14 @@ impl fmt::Display for User {
     fn fmt(&self, f: &mut fmt::Formatter) -> fmt::Result {
         write!(f, "Name: {}Password: {}Email: {}", self.username, self.password, self.email)
     }
+}
+
+pub fn get_user_by_id(id: usize, users: &HashMap<usize, User>) -> Option<&User> {
+    if id == 0 { return  None; }
+    for user in users.iter() {
+        if user.0 == &id {
+            return Some(user.1);
+        }
+    }
+    None
 }
