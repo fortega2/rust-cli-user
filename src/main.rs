@@ -2,14 +2,6 @@ mod user;
 use std::{collections::HashMap, process::Command};
 use user::*;
 
-#[cfg(test)]
-mod tests {
-    #[test]
-    fn two_plus_two() {
-        assert_eq!(2 + 2, 4);
-    }
-}
-
 fn pause() {
     let _ = Command::new("cmd.exe").arg("/c").arg("pause").status();
 }

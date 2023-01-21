@@ -37,10 +37,6 @@ impl User {
             email,
         }
     }
-
-    // pub fn view(&self) {
-    //     println!("{}", self);
-    // }
 }
 
 impl fmt::Display for User {
