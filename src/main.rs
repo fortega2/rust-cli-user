@@ -24,6 +24,7 @@ fn menu() {
         println!("1. Cargar usuario");
         println!("2. Ver usuarios");
         println!("3. Buscar usuario por ID");
+        println!("4. Eliminar usuario por ID");
         println!("0. Salir");
         println!("\nElegí una opción:");
 
@@ -38,21 +39,44 @@ fn menu() {
             }
             2 => {
                 println!();
-                for user in &users {
+                if users.len() == 0 {
+                    println!("No hay usuarios cargados\n");
+                } else {
+                    for user in &users {
                     println!("ID: {}\n{}", user.0, user.1);
+                    }
                 }
+                
                 pause();
                 println!();
             }
             3 => {
                 println!("\nIngrese el ID que desea buscar:");
+
                 let mut buffer = String::new();
                 stdin.read_line(&mut buffer).expect("Error en input");
-                let id = buffer.trim().parse::<i8>().unwrap_or(0);
-                match get_user_by_id(id as usize, &users) {
-                    Some(user) => println!("\n{}", user),
-                    None => println!("\nNo se ha encontrado el usuario con ID {id}\n"),
+                let id = buffer.trim().parse::<usize>().unwrap_or(0);
+
+                match get_user_by_id(id, &users) {
+                    Ok(user) => println!("\n{}", user),
+                    Err(()) => println!("\nNo se ha encontrado el usuario con ID {id}\n"),
                 }
+
+                pause();
+                println!();
+            }
+            4 => {
+                println!("\nIngrese el ID que desea buscar:");
+
+                let mut buffer = String::new();
+                stdin.read_line(&mut buffer).expect("Error en input");
+                let id = buffer.trim().parse::<usize>().unwrap_or(0);
+
+                match delete_user_by_id(id, &mut users){
+                    Ok(id) => println!("\nEl usuario con ID {id} fue eliminado\n"),
+                    Err(id) => println!("\nNo se ha encontrado el usuario con ID {id}\n"),
+                }
+
                 pause();
                 println!();
             }
@@ -68,4 +92,5 @@ fn menu() {
 
 fn main() {
     menu();
+    pause();
 }
