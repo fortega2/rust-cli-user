@@ -45,20 +45,20 @@ impl fmt::Display for User {
     }
 }
 
-pub fn get_user_by_id(id: usize, users: &HashMap<usize, User>) -> Result<&User, ()> {
-    if id == 0 { return  Err(()); }
+pub fn get_user_by_id(id: usize, users: &HashMap<usize, User>) -> Option<&User> {
+    if id == 0 { return  None; }
     for user in users.iter() {
         if user.0 == &id {
-            return Ok(user.1);
+            return Some(user.1);
         }
     }
-    Err(())
+    None
 }
 
-pub fn delete_user_by_id(id: usize, users: &mut HashMap<usize, User>) -> Result<i8, usize> {
-    if id == 0 { return  Err(id); }
+pub fn delete_user_by_id(id: usize, users: &mut HashMap<usize, User>) -> Option<i8> {
+    if id == 0 { return  None; }
     match users.remove(&id) {
-        Some(_) => Ok(id as i8),
-        None => Err(id),
+        Some(_) => Some(id as i8),
+        None => None,
     }
 }

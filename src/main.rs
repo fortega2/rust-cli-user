@@ -51,8 +51,8 @@ fn menu() {
                 let id = buffer.trim().parse::<usize>().unwrap_or(0);
 
                 match get_user_by_id(id, &users) {
-                    Ok(user) => println!("\n{}", user),
-                    Err(()) => println!("\nNo se ha encontrado el usuario con ID {id}\n"),
+                    Some(user) => println!("\n{}", user),
+                    None => println!("\nNo se ha encontrado el usuario con ID {id}\n"),
                 }
 
                 pause();
@@ -66,8 +66,8 @@ fn menu() {
                 let id = buffer.trim().parse::<usize>().unwrap_or(0);
 
                 match delete_user_by_id(id, &mut users){
-                    Ok(id) => println!("\nEl usuario con ID {id} fue eliminado\n"),
-                    Err(id) => println!("\nNo se ha encontrado el usuario con ID {id}\n"),
+                    Some(id) => println!("\nEl usuario con ID {id} fue eliminado\n"),
+                    None => println!("\nNo se ha encontrado el usuario con ID {id}\n"),
                 }
 
                 pause();
