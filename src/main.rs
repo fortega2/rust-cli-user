@@ -17,6 +17,7 @@ fn menu() {
         println!("2. Ver usuarios");
         println!("3. Buscar usuario por ID");
         println!("4. Eliminar usuario por ID");
+        println!("5. Eliminar todos los usuarios");
         println!("0. Salir");
         println!("\nElegí una opción:");
 
@@ -69,6 +70,12 @@ fn menu() {
                     Err(id) => println!("\nNo se ha encontrado el usuario con ID {id}\n"),
                 }
 
+                pause();
+                println!();
+            }
+            5 => {
+                users.clear();
+                println!("\nSe borraron todos los usuarios registrados\n");
                 pause();
                 println!();
             }
