@@ -3,7 +3,9 @@ use std::{collections::HashMap, process::Command};
 use user::*;
 
 fn pause() {
-    let _ = Command::new("cmd.exe").arg("/c").arg("pause").status();
+    if cfg!(target_os = "windows") {
+        let _ = Command::new("cmd").args(["/C", "pa"]).status();
+    }
 }
 
 fn menu() {
