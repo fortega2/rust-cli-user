@@ -4,7 +4,7 @@ use user::*;
 
 fn pause() {
     if cfg!(target_os = "windows") {
-        let _ = Command::new("cmd").args(["/C", "pa"]).status();
+        let _ = Command::new("cmd").args(["/C", "pause"]).status();
     }
 }
 
